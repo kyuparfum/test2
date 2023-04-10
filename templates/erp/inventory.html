@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mb-5">상품 리스트</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Product code</th>
+                <th>Product name</th>
+                <th>Product features</th>
+                <th>Price</th>
+                <th>Size</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.code }}</td>
+                    <td><a href="/inventory/{{ product.id }}">{{ product.name }}</a></td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.t_size }}</td>
+                    <td>{{ product.quantity }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No products found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mb-5">재고관리</h1>
+        <form action="/inventory/{{ product.id }}" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-2">
+                {{ form }}
+                <button type="submit" class="btn btn-primary" style="float:right;">
+                    입고
+                </button>
+                <hr>
+            </div>
+        </form>
+        <form action="/inventory-delete/{{ product.id }}" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-2">
+                {{ deleteform }}
+                <button type="submit" class="btn btn-primary" style="float:right;">
+                    츨고
+                </button>
+                <hr>
+            </div>
+        </form>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Product name</th>
+                <th>현재 재고</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ total }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="overflow-y: auto; height: 500px">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Product name</th>
+                    <th>입고량</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for iv in inventory %}
+                    <tr>
+                        <td>{{ iv.product.name }}</td>
+                        <td>{{ iv.total }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Product name</th>
+                <th>출고량</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for de in delete %}
+                <tr>
+                    <td>{{ de.product.name }}</td>
+                    <td>{{ de.decreased }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

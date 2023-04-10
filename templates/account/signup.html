@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">{{ title }}</div>
+        <div class="card-body">
+          <form class="form-area" method="post" action="/signup/">
+            {% csrf_token %}
+            ID : {{ form.username }} <br>
+            PW : {{ form.password }}<br>
+            PW Con : {{ form.password2 }}<br>
+            Email : {{ form.email }}<br>
+            <button type="submit" class="btn btn-primary">회원가입</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
